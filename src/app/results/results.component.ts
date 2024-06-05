@@ -1,20 +1,25 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, inject, input } from '@angular/core';
 import { ResultObject } from '../data.model';
 import { CurrencyPipe } from '@angular/common';
-
+import { InvestmentService } from '../investment.service';
 
 @Component({
   selector: 'app-results',
-  standalone: true,
-  imports: [CurrencyPipe],
+  // standalone: true,
+  // imports: [CurrencyPipe],
   templateUrl: './results.component.html',
-  styleUrl: './results.component.css'
+  styleUrl: './results.component.css',
 })
 export class ResultsComponent {
   // es qveda chveulebrivi decoratorit aris gaketebuli
-// @Input() results?:ResultObject[]
+  // @Input() results?:ResultObject[]
+  // xolo es input() it
+  // results=input<ResultObject[]>()
+  // es qveda ukve service it aris gaketebuli
 
-// xolo es input() it
+  private data=inject(InvestmentService)
 
-results=input<ResultObject[]>()
+  get results(){
+   return  this.data.annualData()
+  }
 }
